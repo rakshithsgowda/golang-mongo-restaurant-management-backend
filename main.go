@@ -16,12 +16,12 @@ func main() {
 	port := os.Getenv("PORT")
 
 	if port == "" {
-		port := "8000"
+		port = "8000"
 	}
 
 	router := gin.New()
 	router.Use(gin.Logger())
-	routes.userRoutes(router)
+	routes.UserRoutes(router)
 	router.Use(middlewares.Authentication())
 
 	routes.FoodRoutes(router)
