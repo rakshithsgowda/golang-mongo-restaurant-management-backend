@@ -10,8 +10,9 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/go-playground/validator/v10"
+	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
-	"gopkg.in/mgo.v2/bson"
 )
 
 var foodCollection *mongo.Collection = database.OpenCollection(database.Client, "food")
@@ -65,7 +66,7 @@ func CreateFood() gin.HandlerFunc {
 
 		food.Created_at, _ = time.Parse(time.RFC3339, time.Now()).Format(time.RFC3339)
 		food.Updated_at, _ = time.Parse(time.RFC3339, time.Now()).Format(time.RFC3339)
-		food.ID = primtive.NewObjectID()
+		food.ID = primitive.NewObjectID()
 		food.Food_id = food.ID.Hex()
 
 		var num = toFixed(*food.Price, 2)
